@@ -1,27 +1,21 @@
 # MicroServiceParent
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
+## (child)目录下进行一次编译
 
-## Development server
+ng build --project=microServiceChild --configuration production --output-hashing=none --single-bundle
+编译过后可以看到dist目录下的main.js，将这个文件载入到任意网页就能直接运行ng应用
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## （parent）app.modules中引入并import，然后添加schemas，注意需要从@angular/core引入
 
-## Code scaffolding
+## （parent）编译
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ng build --project=microServiceParent --configuration production --output-hashing=none
+## 把child的主进程main.js和兼容性文件polyfill.js复制到parent目录下
+注意main.js更名时需要与tag的名字相同！！！我这里是micro-service-child，
 
-## Build
+## 这里使用轻量级server进行测试
+npm install lite-server -g
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 启动项目
+lite-server
